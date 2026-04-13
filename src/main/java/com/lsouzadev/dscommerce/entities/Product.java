@@ -23,6 +23,7 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
+    @Lob
     private String description;
 
     @Column(nullable = false)
@@ -31,8 +32,8 @@ public class Product {
     @Column(nullable = false)
     private String imgUrl;
 
-    @OneToMany(mappedBy = "product")
-    private Set<Order> orders = new HashSet<>();
+//    @OneToMany(mappedBy = "product")
+//    private Set<Order> orders = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
@@ -79,9 +80,9 @@ public class Product {
         return imgUrl;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
+//    public Set<Order> getOrders() {
+//        return orders;
+//    }
 
     public Set<Category> getCategory() {
         return category;
