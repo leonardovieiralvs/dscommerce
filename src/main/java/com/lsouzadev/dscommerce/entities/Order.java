@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
 @Entity
 @Table(name = "tb_order")
 public class Order {
@@ -26,7 +27,6 @@ public class Order {
     @Column(nullable = false)
     private OrderStatus status;
 
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -37,4 +37,64 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrdemItem> items = new HashSet<>();
+
+
+    public Set<OrdemItem> getItems() {
+        return items;
+    }
+
+    public List<Order> getOrders() {
+        return items.stream().map(x -> x.getOrder()).toList();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getMoment() {
+        return moment;
+    }
+
+    public void setMoment(Instant moment) {
+        this.moment = moment;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

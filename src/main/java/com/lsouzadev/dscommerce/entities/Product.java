@@ -40,6 +40,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> category = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrdemItem> items = new HashSet<>();
+
     public void setName(String name) {
         this.name = name;
     }
