@@ -3,9 +3,7 @@ package com.lsouzadev.dscommerce.entities;
 import com.lsouzadev.dscommerce.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.Instant;
 import java.util.HashSet;
