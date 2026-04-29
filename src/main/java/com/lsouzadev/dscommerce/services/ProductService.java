@@ -41,4 +41,10 @@ public class ProductService {
         Page<Product> products = productRepository.findAll(pageable);
         return products.map(productMapper::toDto);
     }
+
+    public ProductDto insert(ProductDto productDto) {
+        Product save = productMapper.toEntity(productDto);
+        Product productSave = productRepository.save(save);
+        return productMapper.toDto(productSave);
+    }
 }
