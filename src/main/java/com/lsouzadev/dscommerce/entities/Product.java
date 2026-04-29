@@ -1,17 +1,11 @@
 package com.lsouzadev.dscommerce.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.Objects;
+import java.util.List;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "tb_product")
 public class Product {
@@ -20,45 +14,45 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     @Lob
     private String description;
 
-    @Column(nullable = false)
     private Double price;
 
-    @Column(nullable = false)
     private String imgUrl;
-
-//    @OneToMany(mappedBy = "product")
-//    private Set<Order> orders = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> category = new HashSet<>();
+    private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "id.product")
-    private Set<OrdemItem> items = new HashSet<>();
+    private Set<OrderItem> items = new HashSet<>();
 
-    public void setName(String name) {
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
+        this.id = id;
         this.name = name;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setPrice(Double price) {
         this.price = price;
+        this.imgUrl = imgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public Product() {
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public List<Order> getOrders() {
+        return items.stream().map(x -> x.getOrder()).toList();
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     public Long getId() {
@@ -69,36 +63,31 @@ public class Product {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
         return price;
     }
 
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public String getImgUrl() {
         return imgUrl;
     }
 
-//    public Set<Order> getOrders() {
-//        return orders;
-//    }
-
-    public Set<Category> getCategory() {
-        return category;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

@@ -3,17 +3,7 @@ package com.lsouzadev.dscommerce.entities;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.Objects;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 @Embeddable
 public class OrdemItemPK {
 
@@ -25,16 +15,19 @@ public class OrdemItemPK {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrdemItemPK that = (OrdemItemPK) o;
-        return Objects.equals(order, that.order) && Objects.equals(product, that.product);
+    public Order getOrder() {
+        return order;
     }
 
-    @Override
-    public int hashCode() {
-        return 0;
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
