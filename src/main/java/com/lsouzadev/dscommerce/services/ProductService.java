@@ -47,4 +47,12 @@ public class ProductService {
         Product productSave = productRepository.save(save);
         return productMapper.toDto(productSave);
     }
+
+    public ProductDto update(Long id, ProductDto productDto) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found!"));
+        productMapper.updateEntity(product, productDto);
+
+        Product save = productRepository.save(product);
+        return productMapper.toDto(save);
+    }
 }
