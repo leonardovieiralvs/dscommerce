@@ -25,12 +25,12 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
-    public List<ProductDto> findAll() {
-
-        List<Product> result = productRepository.findAll();
-
-        return result.stream().map(productMapper::toDto).toList();
-    }
+//    public List<ProductDto> findAll() {
+//
+//        List<Product> result = productRepository.findAll();
+//
+//        return result.stream().map(productMapper::toDto).toList();
+//    }
 
     public ProductDto findById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found."));
@@ -49,10 +49,15 @@ public class ProductService {
     }
 
     public ProductDto update(Long id, ProductDto productDto) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found!"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found."));
         productMapper.updateEntity(product, productDto);
 
         Product save = productRepository.save(product);
         return productMapper.toDto(save);
+    }
+
+    public void delete(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found."));
+        productRepository.delete(product);
     }
 }
