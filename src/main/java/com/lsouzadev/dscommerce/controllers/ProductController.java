@@ -3,6 +3,7 @@ package com.lsouzadev.dscommerce.controllers;
 
 import com.lsouzadev.dscommerce.dto.ProductDto;
 import com.lsouzadev.dscommerce.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -32,14 +33,14 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> insert(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto productDto) {
         ProductDto insert = productService.insert(productDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(insert);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> update(@PathVariable Long id, @Valid @RequestBody ProductDto productDto) {
         ProductDto update = productService.update(id, productDto);
         return ResponseEntity.status(HttpStatus.OK).body(update);
     }
