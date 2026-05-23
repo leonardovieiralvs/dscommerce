@@ -6,20 +6,17 @@ import com.lsouzadev.dscommerce.exceptions.DatabaseViolationException;
 import com.lsouzadev.dscommerce.exceptions.ResourceNotFoundException;
 import com.lsouzadev.dscommerce.mapper.ProductMapper;
 import com.lsouzadev.dscommerce.repositories.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private ProductMapper productMapper;
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
     public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
