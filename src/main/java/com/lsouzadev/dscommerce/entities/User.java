@@ -106,7 +106,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return roles;
     }
 
     public String getPassword() {
@@ -115,7 +115,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 
     public void setPassword(String password) {

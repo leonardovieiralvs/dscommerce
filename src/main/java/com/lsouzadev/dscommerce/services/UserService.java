@@ -1,4 +1,8 @@
 package com.lsouzadev.dscommerce.services;
 
-public class UserService {
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public class UserService{
 }
