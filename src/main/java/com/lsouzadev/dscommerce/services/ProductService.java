@@ -9,7 +9,6 @@ import com.lsouzadev.dscommerce.repositories.ProductRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,7 +27,7 @@ public class ProductService {
         return productMapper.toDto(product);
     }
 
-    public Page<ProductDto> findByPage(Pageable pageable) {
+    public Page<ProductDto> findAll(Pageable pageable) {
         Page<Product> products = productRepository.findAll(pageable);
         return products.map(productMapper::toDto);
     }

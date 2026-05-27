@@ -21,16 +21,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'OPERATOR')")
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok((productService.findById(id)));
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> findByPage(Pageable pageable) {
+    public ResponseEntity<Page<ProductDto>> findAll(Pageable pageable) {
 
-        Page<ProductDto> byPage = productService.findByPage(pageable);
+        Page<ProductDto> byPage = productService.findAll(pageable);
         return ResponseEntity.ok(byPage);
     }
 
