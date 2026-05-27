@@ -1,6 +1,7 @@
 package com.lsouzadev.dscommerce.services;
 
 import com.lsouzadev.dscommerce.dto.ProductDto;
+import com.lsouzadev.dscommerce.dto.ProductMinDto;
 import com.lsouzadev.dscommerce.entities.Product;
 import com.lsouzadev.dscommerce.exceptions.DatabaseViolationException;
 import com.lsouzadev.dscommerce.exceptions.ResourceNotFoundException;
@@ -27,9 +28,9 @@ public class ProductService {
         return productMapper.toDto(product);
     }
 
-    public Page<ProductDto> findAll(Pageable pageable) {
-        Page<Product> products = productRepository.findAll(pageable);
-        return products.map(productMapper::toDto);
+    public Page<ProductMinDto> findAll(String name, Pageable pageable) {
+        Page<Product> products = productRepository.searchByName(name, pageable);
+        return products.map(productMapper::toMinDto);
     }
 
     public ProductDto insert(ProductDto productDto) {

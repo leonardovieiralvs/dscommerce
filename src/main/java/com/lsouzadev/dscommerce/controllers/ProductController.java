@@ -2,6 +2,7 @@ package com.lsouzadev.dscommerce.controllers;
 
 
 import com.lsouzadev.dscommerce.dto.ProductDto;
+import com.lsouzadev.dscommerce.dto.ProductMinDto;
 import com.lsouzadev.dscommerce.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -27,9 +28,10 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<ProductMinDto>> findAll(@RequestParam(name = "name", defaultValue = "") String name,
+                                                       Pageable pageable) {
 
-        Page<ProductDto> byPage = productService.findAll(pageable);
+        Page<ProductMinDto> byPage = productService.findAll(name, pageable);
         return ResponseEntity.ok(byPage);
     }
 
