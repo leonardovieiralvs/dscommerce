@@ -6,7 +6,7 @@ import com.lsouzadev.dscommerce.entities.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = CategoryMapper.class)
 public interface ProductMapper {
 
     Product toEntity(ProductDto productDto);
