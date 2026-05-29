@@ -1,12 +1,10 @@
 package com.lsouzadev.dscommerce.controllers;
 
 import com.lsouzadev.dscommerce.config.UserService;
-import com.lsouzadev.dscommerce.dto.ProductDto;
 import com.lsouzadev.dscommerce.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

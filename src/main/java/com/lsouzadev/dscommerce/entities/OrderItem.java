@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 public class OrderItem {
 
     @EmbeddedId
-    private OrdemItemPK id = new OrdemItemPK();
+    private OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
     private Double price;

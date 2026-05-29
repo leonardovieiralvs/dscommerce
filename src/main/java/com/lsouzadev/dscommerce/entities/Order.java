@@ -65,6 +65,26 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 }
 
 
