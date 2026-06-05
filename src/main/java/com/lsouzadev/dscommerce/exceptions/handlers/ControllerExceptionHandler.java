@@ -3,6 +3,7 @@ package com.lsouzadev.dscommerce.exceptions.handlers;
 import com.lsouzadev.dscommerce.dto.FieldMessage;
 import com.lsouzadev.dscommerce.dto.CustomError;
 import com.lsouzadev.dscommerce.exceptions.DatabaseViolationException;
+import com.lsouzadev.dscommerce.exceptions.ForbiddenException;
 import com.lsouzadev.dscommerce.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -62,13 +63,17 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
     }
 
-    // List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
-    //        List<ErroCampoDto> list = fieldErrors.stream().map(fe -> new ErroCampoDto(fe.getField(), fe.getDefaultMessage())).toList();
-    //        ErrorRespostaDto erroDeValidacao = ErrorRespostaDto.builder()
-    //                .timestamp(LocalDateTime.now())
-    //                .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
-    //                .mensagem("Erro de validação")
-    //                .path(request.getRequestURI())
-    //                .erros(list)
-    //                .build();
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomError> forbiddenExceptionHandler(ForbiddenException e, HttpServletRequest request) {
+        CustomError error = CustomError.builder()
+                .timestamp(Instant.now())
+                .status(HttpStatus.FORBIDDEN.value())
+                .message(e.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.badRequest().body(error);
+    }
+
+
 }
