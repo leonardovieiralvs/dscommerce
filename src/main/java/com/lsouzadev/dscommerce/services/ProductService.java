@@ -47,7 +47,7 @@ public class ProductService {
         for (CategoryDto dto : productDto.categories()) {
 
             Category category = categoryRepository
-                    .getReferenceById(dto.id());
+                    .getReferenceById(dto.getId());
 
             entity.getCategories().add(category);
         }
