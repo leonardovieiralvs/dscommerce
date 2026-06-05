@@ -1,6 +1,6 @@
 package com.lsouzadev.dscommerce.controllers;
 
-import com.lsouzadev.dscommerce.config.UserService;
+import com.lsouzadev.dscommerce.services.UserService;
 import com.lsouzadev.dscommerce.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

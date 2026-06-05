@@ -16,6 +16,9 @@ public class OrderItemDto {
         this.quantity = quantity;
     }
 
+    public OrderItemDto() {
+    }
+
     public OrderItemDto(OrderItem entity) {
         productId = entity.getProduct().getId();
         name = entity.getProduct().getName();
