@@ -16,7 +16,7 @@ public class AuthService {
     public void validateSelfOrAdmin(Long userId) {
         User me = userService.authenticated();
         if (!me.hasAnyRole("ADMIN") && !me.getId().equals(userId)) {
-            throw new ForbiddenException("Acess danied");
+            throw new ForbiddenException("Access danied");
         }
     }
 }

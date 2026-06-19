@@ -3,7 +3,6 @@ package com.lsouzadev.dscommerce.services;
 import com.lsouzadev.dscommerce.dto.UserDto;
 import com.lsouzadev.dscommerce.entities.Role;
 import com.lsouzadev.dscommerce.entities.User;
-import com.lsouzadev.dscommerce.mapper.UserMapper;
 import com.lsouzadev.dscommerce.projection.UserDetailsProjection;
 import com.lsouzadev.dscommerce.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -12,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,11 +19,9 @@ import java.util.List;
 public class UserService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
     }
 
     @Override
@@ -55,8 +53,9 @@ public class UserService implements org.springframework.security.core.userdetail
         }
     }
 
+    @Transactional(readOnly = true)
     public UserDto getMe() {
-        User user = authenticated();
-        return userMapper.toDto(user);
+        User entity = authenticated();
+        return new UserDto(entity);
     }
 }

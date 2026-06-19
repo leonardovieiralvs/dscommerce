@@ -22,17 +22,17 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
-        return ResponseEntity.ok((productService.findById(id)));
-    }
-
     @GetMapping
     public ResponseEntity<Page<ProductMinDto>> findAll(@RequestParam(name = "name", defaultValue = "") String name,
                                                        Pageable pageable) {
 
         Page<ProductMinDto> byPage = productService.findAll(name, pageable);
         return ResponseEntity.ok(byPage);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
+        return ResponseEntity.ok((productService.findById(id)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
